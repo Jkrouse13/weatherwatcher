@@ -33,16 +33,14 @@ class WeatherController < ApplicationController
   def average_humidity
     indy_final = []
     indy_raw_hums = Indy.all
-    indy_hums = indy_raw_hums.collect{ |x| x.humidity}
+    indy_hums = indy_raw_hums.collect(&:humidity)
     indy_hums.each do |hum|
-      indy_final << hum.tr( '%', '').to_i
+      indy_final << hum.tr('%', '').to_i
     end
-
   end
 
   def find_average(arr)
     arr.reduce
-
   end
 
   def prep_to_average
